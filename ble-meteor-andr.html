@@ -1,0 +1,83 @@
+<head>
+  <title>ble-meteor-android</title>
+</head>
+
+<body>
+
+  <h2>Devices:</h2>
+  <button name="scan">scan</button>
+<!--   <button name="retrieve">retrieve</button> -->
+  <button name="stop">stop</button>
+	Status: 
+	{{#if scan.isScanning}} 
+		scanning 
+	{{else}}	
+		stopped
+	{{/if}}
+	<br />
+	{{#if connected.isConnected}}
+		connected: {{connected.isConnected}} to {{connected.address}}
+	{{/if}}
+
+	<br />
+	Currently {{bleresult.name}} {{bleresult.address}} 
+	<br />
+	{{#if bleresult.rssi}}
+		rssi: {{bleresult.rssi}}
+	{{/if}}
+	{{#if bleresult.message}}
+		message: {{bleresult.message}}
+	{{/if}}
+	{{#if bleresult.status}}
+		status: {{bleresult.status}}
+	{{/if}}
+	{{#if bleresult.services}}
+		<br />
+		services: 
+		{{#each bleresult.services}}
+			{{serviceUuid}}
+		{{/each}}
+	{{/if}}
+	
+  <ul>
+    {{#each devices}}
+      {{> device}}
+    {{/each}}
+  </ul>
+
+  <h2>Logs:</h2>
+  <ul>
+    {{#each logs}}
+      {{> log}}
+    {{/each}}
+  </ul>
+</body>
+
+<template name="log">
+  <li>{{ text }}</li>
+</template>
+
+<template name="device">
+	<li>
+		{{ name }} {{ address }} connected: {{connected.isConnected}}
+		{{#if connected.isConnected}}
+			connected-yes
+		{{/if}}
+		<br />
+		{{#if connected.isConnected}}
+			<button name="discover">discover</button> 
+			<button name="close">disconnect</button> 
+<!-- 			<button name="close">close</button>  -->
+		{{else}}
+			{{#if status}}
+				<button name="reconnect">reconnect</button>
+				<button name="close">disconnect</button> 
+<!-- 				<button name="close">close</button>  -->
+			{{else}}
+				<button name="connect">connect</button>
+			{{/if}}
+		{{/if}}
+<!-- 		<button name="retrieve">retrieve</button> -->
+	</li>
+
+</template>
