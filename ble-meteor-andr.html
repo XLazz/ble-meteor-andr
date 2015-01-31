@@ -59,9 +59,9 @@
 
 <template name="device">
 	<li>
-		{{ name }} {{ address }} connected: {{connected.isConnected}}
+		{{ name }} {{ address }} 
 		{{#if connected.isConnected}}
-			connected-yes
+			connected
 		{{/if}}
 		<br />
 		{{#if connected.isConnected}}

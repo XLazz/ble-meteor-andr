@@ -67,7 +67,7 @@ if (Meteor.isCordova) {
 		},
 		status: function() {
 			console.log('bleresult ', Session.get('bleresult'));
-			if (Session.get('bleresult').error === 'connect') {
+			if ((Session.get('bleresult').error === 'connect') && (Session.get('bleresult').address === this.address)){
 				return true;
 			}
 		},
